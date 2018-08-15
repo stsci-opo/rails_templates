@@ -111,6 +111,7 @@ class Rails::Generators::AppGenerator
     end
 
     git_commit("devise: configure for #{model_name}") do
+      default_model_name = 'DeviseAuthentication'
       model_name = ask('What would you like the user model to be called? [User]')
       model_name = 'User' if model_name.blank?
       generate 'devise', model_name
