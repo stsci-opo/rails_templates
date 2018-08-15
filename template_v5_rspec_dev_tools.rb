@@ -248,11 +248,11 @@ add_gem_with_query 'guard-rspec', { require: false, group: :development } do
   append_to_readme("\n- Autospec with `$ guard`")
 end
 
-add_gem_with_query 'blazer', { group: :development } do
-  run `rails g blazer:install && rake db:migrate`
+add_gem_with_query 'blazer' do
+  run `rails generate blazer:install && rake db:migrate`
   # append_to_file('spec/spec_helper.rb', 'fail("TODO: Uncomment the suggested configuration items.")')
   append_to_file('config/routes.rb', 'fail("TODO: move the `mount Blazer...` code.")')
-  append_to_file('config/routes.rb', 'mount Blazer::Engine, at: "blazer"')
+  append_to_file('config/routes.rb', "\nnamespace :admin do\n  mount Blazer::Engine, at: 'blazer'\nend")
   append_to_readme("\n- [Blazer](https://github.com/ankane/blazer) is a database query tool, available at `/blazer`.")
 end
 
