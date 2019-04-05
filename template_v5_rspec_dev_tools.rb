@@ -7,27 +7,30 @@ require 'pry-byebug'
 class Rails::Generators::AppGenerator
 
   def add_bootstrap_with_query
-    return unless yes?("Would you like to install bootstrap-sass? (y/n)")
+    return unless yes?("Would you like to install bootstrap 4? (y/N)")
 
-    add_gem 'bootstrap-sass' do
+    add_gem 'bootstrap' do
       unless File.exists?('app/assets/stylesheets/application.scss')
         run 'mv app/assets/stylesheets/application.css app/assets/stylesheets/application.scss'
       end
       app_stylesheet_file_contents = <<~FILE_CONTENTS
-        // "bootstrap-sprockets" must be imported before "bootstrap" and "bootstrap/variables"
-        @import "bootstrap-sprockets";
+        // Custom bootstrap variables must be set or imported *before* bootstrap.
+        // The available variables can be found here: https://github.com/twbs/bootstrap-rubygem/blob/master/assets/stylesheets/bootstrap/_variables.scss
         @import "bootstrap";
         // TODO: we recommend converting any `*=require...` statements to @import
       FILE_CONTENTS
       append_to_file('app/assets/stylesheets/application.scss',app_stylesheet_file_contents)
 
       app_javascript_file_contents = <<~FILE_CONTENTS
-        fail("TODO: Move `require bootstrap-sprockets` just after jquery")
+        fail("TODO: Move the following 3 requires to just after jquery")
+        //= require jquery3
+        //= require popper
         //= require bootstrap-sprockets
       FILE_CONTENTS
       append_to_file('app/assets/javascripts/application.js', app_javascript_file_contents)
     end
 
+    add_gem 'jquery-rails' # required by bootstrap
     add_gem 'simple_form', {}, 'simple_form:install --bootstrap'
     add_gem 'bh' # bootstrap helpers
   end
