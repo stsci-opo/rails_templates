@@ -264,9 +264,9 @@ add_gem_with_query 'whenever', { require: false } do # manages cron
   append_to_readme("\n\n## Cron\n\n- managed by whenever gem via `config/schedule.rb`.\n- see: https://github.com/javan/whenever")
 end
 
-add_gem_with_query 'meta_request', { group: non_production_groups} do # supports a Chrome extension for Rails development
-  append_to_readme("\n\n## Debugging\n\n- meta_request works with rails_panel to provide a tab in Chrome Dev Tools (https://github.com/dejan/rails_panel).")
-end
+# add_gem_with_query 'meta_request', { group: non_production_groups} do # supports a Chrome extension for Rails development
+#   append_to_readme("\n\n## Debugging\n\n- meta_request works with rails_panel to provide a tab in Chrome Dev Tools (https://github.com/dejan/rails_panel).")
+# end
 add_gem_with_query 'sandi_meter', { require: false, group: non_production_groups } # Sandi Metz' rules
 
 
