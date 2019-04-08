@@ -38,7 +38,7 @@ class Rails::Generators::AppGenerator
   def add_capistrano_with_query
     return unless yes?("Would you like to install capistrano? (y/n)")
 
-    add_gem 'capistrano-rails' do
+    add_gem('capistrano-rails', { require: false, group: :development }) do
       git_commit('capistrano: Install/generate files.') do
         run 'bundle exec cap install' # capistrano's "generator"
       end
@@ -59,7 +59,7 @@ class Rails::Generators::AppGenerator
     end
 
     if yes?("Will you deploy to passenger? (y/n)")
-      add_gem('capistrano-passenger') do
+      add_gem('capistrano-passenger', { require: false, group: :develpment }) do
         uncomment_lines 'Capfile',  %r(require 'capistrano/passenger)
       end
     end
